@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body {
+            background: linear-gradient(-45deg, #ff6f61, #ffcc00, #ff6f61);
+            background-size: 400% 400%;
+            animation: gradientBG 12s ease infinite;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .edit-form-container {
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+            max-width: 700px;
+            margin: 60px auto;
+            color: #fff;
+        }
+
+        h3 {
+            font-size: 2rem;
+            color: #ffcc00;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px #000;
+        }
+
+        label {
+            font-weight: bold;
+            color: #ffaa00;
+        }
+
+        .form-control {
+            background-color: #222;
+            color: white;
+            border: 2px solid #ff6600;
+            border-radius: 12px;
+            padding: 10px;
+            transition: 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #ffaa33;
+            box-shadow: 0 0 10px #ffaa33;
+        }
+
+        .btn-success {
+            background-color: #00cc66;
+            border: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border-radius: 12px;
+            padding: 12px;
+            margin-top: 20px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn-success:hover {
+            background-color: #00e676;
+            transform: scale(1.05);
+            box-shadow: 0 0 15px #00e676;
+        }
+    </style>
+</head>
+<body>
+    <div class="edit-form-container">
+        <h3>Edit Question</h3>
+        <form method="POST">
+            <div class="mb-3">
+                <label class="form-label">Question</label>
+                <input type="text" name="question" class="form-control" value="{{ question.question }}" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Option 1</label>
+                <input type="text" name="option1" class="form-control" value="{{ question.option1 }}" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Option 2</label>
+                <input type="text" name="option2" class="form-control" value="{{ question.option2 }}" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Option 3</label>
+                <input type="text" name="option3" class="form-control" value="{{ question.option3 }}" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Option 4</label>
+                <input type="text" name="option4" class="form-control" value="{{ question.option4 }}" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Answer</label>
+                <input type="text" name="answer" class="form-control" value="{{ question.answer }}" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Category</label>
+                <input type="text" name="category" class="form-control" value="{{ question.category }}" required>
+            </div>
+            <button type="submit" class="btn btn-success w-100">Save Changes</button>
+        </form>
+    </div>
+</body>
+</html>
+{% endblock %}

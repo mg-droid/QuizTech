@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz Result</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Fredoka One', cursive;
+            background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fbc2eb, #a6c1ee);
+            background-size: 400% 400%;
+            animation: gradientBG 10s ease infinite;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        h1 {
+            font-size: 3em;
+            color: #ffffff;
+            text-shadow: 2px 2px #444;
+        }
+
+        h2, h3 {
+            font-size: 2em;
+            color: #fff;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px #444;
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 20px;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 15px;
+            background-color: #ff6f61;
+            color: white;
+            box-shadow: 0 6px #c1443c;
+            cursor: pointer;
+            animation: bounce 2s infinite;
+            transition: transform 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #ff4d40;
+            transform: scale(1.1);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="confetti-canvas"></canvas>
+
+    <h1>🎉 Quiz Completed! 🎉</h1>
+    <h2>Your Score: {{ score }}</h2>
+
+    <!-- 🎯 Score Message -->
+    <h3 id="score-message"></h3>
+
+    <div class="btn-container">
+        <a href="{{ url_for('categories') }}">
+            <button>Try Another Category</button>
+        </a>
+
+        <a href="{{ url_for('leaderboard') }}">
+            <button>Go to Leaderboard</button>
+        </a>
+    </div>
+
+    <!-- Confetti JS -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+        // 🎉 Confetti animation
+        setTimeout(() => {
+            const duration = 2 * 1000;
+            const end = Date.now() + duration;
+
+            (function frame() {
+                confetti({
+                    particleCount: 5,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 }
+                });
+                confetti({
+                    particleCount: 5,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 }
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            })();
+        }, 300);
+
+        // 💬 Dynamic score message
+        const score = parseInt("{{ score }}");
+        let message = "";
+
+        if (score >= 8) {
+            message = "Awesome job! 🏆";
+        } else if (score >= 5) {
+            message = "Nice work! 💪 Keep going!";
+        } else {
+            message = "Don't give up! 🔥 Try again!";
+        }
+
+        document.getElementById("score-message").innerText = message;
+    </script>
+	
+	<!-- 🔊 Success Sound -->
+<audio id="success-sound" autoplay>
+  <source src="{{ url_for('static', filename='sounds/success.mp3') }}" type="audio/mpeg">
+  Your browser does not support the audio tag.
+</audio>
+</body>
+</html>

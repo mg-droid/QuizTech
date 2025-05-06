@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+    body {
+        background: linear-gradient(-45deg, #6a11cb, #2575fc);
+        background-size: 400% 400%;
+        animation: gradientBG 15s ease infinite;
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    @keyframes gradientBG {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    .container {
+        text-align: center;
+        padding: 30px;
+    }
+
+    .leaderboard-table-wrapper {
+        width: 90%;
+        max-width: 800px;
+        margin: 0 auto;
+        margin-top: 30px;
+        overflow-x: auto;
+    }
+
+    .table {
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        border: none;
+        animation: fadeIn 1s ease-in-out;
+        overflow: hidden;
+    }
+
+    thead {
+        background-color: #ff5a5f;
+        color: #fff;
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    tbody tr {
+        background-color: #222;
+        text-align: center;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    tbody tr:hover {
+        background-color: rgba(255, 94, 77, 0.4);
+        transform: scale(1.05);
+    }
+
+    .username {
+        font-size: 1.2rem;
+        color: white;
+    }
+
+    .rank-1 {
+        color: gold;
+        font-weight: bold;
+    }
+
+    .rank-2 {
+        color: silver;
+        font-weight: bold;
+    }
+
+    .rank-3 {
+        color: #cd7f32;
+        font-weight: bold;
+    }
+
+    .back-btn {
+        background-color: #ff5a5f;
+        color: white;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 20px;
+        font-size: 1.2rem;
+        margin-top: 30px;
+        cursor: pointer;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    .back-btn:hover {
+        background-color: #ff3b3f;
+        transform: scale(1.05);
+    }
+
+    .back-btn:active {
+        background-color: #ff5a5f;
+        box-shadow: 0 0 20px #ff5a5f;
+    }
+
+    @keyframes fadeIn {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+    }
+
+    @media (max-width: 768px) {
+        .table {
+            width: 100%;
+        }
+
+        .back-btn {
+            width: 100%;
+        }
+    }
+</style>
+
+<div class="container">
+    <h2>🏆 Top Quiz Players 🏆</h2>
+
+    <div class="leaderboard-table-wrapper">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Username</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for score in scores %}
+                <tr class="leaderboard-row">
+                    <td class="rank-{{ loop.index }}">{{ loop.index }}</td>
+                    <td class="username">{{ score.username }}</td>
+                    <td>{{ score.score }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <a href="{{ url_for('categories') }}">
+        <button class="back-btn">⬅ Back to Game</button>
+    </a>
+</div>
+
+{% endblock %}

@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body {
+            background: linear-gradient(135deg, #ff4d4d, #ff9933, #ff4d4d);
+            background-size: 400% 400%;
+            animation: animatedBG 10s ease infinite;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        @keyframes animatedBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .form-container {
+            background-color: rgba(0, 0, 0, 0.85);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+            max-width: 600px;
+            margin: 60px auto;
+            color: #fff;
+        }
+
+        .form-container h3 {
+            font-size: 2rem;
+            color: #ffcc00;
+            text-shadow: 2px 2px #000;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        label {
+            font-weight: bold;
+            color: #ffcc66;
+        }
+
+        .form-control {
+            border-radius: 12px;
+            border: 2px solid #ff6600;
+            padding: 12px;
+            background-color: #1e1e1e;
+            color: white;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .form-control:focus {
+            background-color: #292929;
+            border-color: #ffaa33;
+            box-shadow: 0 0 10px #ffaa33;
+        }
+
+        .btn-success {
+            background-color: #00cc66;
+            border: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border-radius: 12px;
+            padding: 12px;
+            margin-top: 20px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn-success:hover {
+            background-color: #00e676;
+            transform: scale(1.05);
+            box-shadow: 0 0 15px #00e676;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h3>Add New Question</h3>
+        <form method="POST">
+            <div class="mb-3">
+                <label class="form-label">Question</label>
+                <input type="text" name="question" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Option 1</label>
+                <input type="text" name="option1" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Option 2</label>
+                <input type="text" name="option2" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Option 3</label>
+                <input type="text" name="option3" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Option 4</label>
+                <input type="text" name="option4" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Answer</label>
+                <input type="text" name="answer" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Category</label>
+                <input type="text" name="category" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-success w-100">Add Question</button>
+        </form>
+    </div>
+</body>
+</html>
+{% endblock %}
