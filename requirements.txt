@@ -43,3 +43,4 @@ urllib3==2.4.0
 virtualenv==20.30.0
 Werkzeug==2.3.7
 WTForms==3.2.1
+gunicorn==21.2.0
